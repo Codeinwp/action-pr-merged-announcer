@@ -3,18 +3,47 @@ GitHub action which creates an issue on a destination repo when a PR has been me
 
 ## Inputs
 
-### `who-to-greet`
+### `subscribe_label`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** The name of the issue label which we should watch. Default `"doc-needed"`.
 
-## Outputs
+### `destination_repo`
 
-### `time`
+**Required** The name of the repo where we will create the issue as `<owner>/<repo>`. Default ``.
 
-The time we greeted you.
+### `issue_labels`
+
+**Optional** Labels of the new issue. Default ``.
+
+### `issue_template_content`
+
+**Optional** Content of the new issue. Default `There is a new documentation request for {issue_link}. More details about it [here]({issue_link})`.
+
+### `issue_template_title`
+
+**Optional** Title of the new issue. Default `Documentation for {issue_title}`.
+
 
 ## Example usage
+```yaml
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - development
 
-uses: actions/hello-world-javascript-action@v1.1
-with:
-who-to-greet: 'Mona the Octocat'
+jobs:
+  pr_announcer:
+    runs-on: ubuntu-latest
+    name: Sample job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Checking merged commit
+        uses: Codeinwp/action-pr-merged-announcer@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          destination_repo: "Codeinwp/docs"
+          issue_labels: "neve"
+```

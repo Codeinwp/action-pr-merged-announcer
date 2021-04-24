@@ -1,13 +1,25 @@
 name: 'PR merged announcer'
 description: 'GitHub action which creates an issue on a destination repo when a PR has been merged and the linked issue of the PR has a label that it is following.'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  subscribe_label:
+    description: 'Label which we listen when the PR merge is happening. This should be attached to linked issue.'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    default: 'doc-needed'
+  destination_repo:
+    description: 'Repo where the new issue will be created.'
+    required: true
+  issue_labels:
+    description: 'Labels of the new issue'
+    required: true
+    default: ""
+  issue_template_content:
+    description: 'Content of the new issue'
+    required: true
+    default: "There is a new documentation request for {issue_link}. More details about it [here]({issue_link})"
+  issue_template_title:
+    description: 'Title of the new issue.'
+    required: true
+    default: "Documentation for {issue_title}"
 runs:
   using: 'node12'
   main: 'dist/index.js'

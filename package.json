@@ -20,6 +20,7 @@
   "dependencies": {
     "@actions/core": "^1.2.7",
     "@actions/github": "^4.0.0",
-    "actions-toolkit": "^6.0.1"
+    "actions-toolkit": "^6.0.1",
+    "issue-parser": "^6.0.0"
   }
 }
