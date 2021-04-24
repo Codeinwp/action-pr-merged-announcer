@@ -1,0 +1,25 @@
+{
+  "name": "action-pr-merged-announcer",
+  "version": "1.0.0",
+  "description": "GitHub action which creates an issue on a destination repo when a PR has been merged and the linked issue of the PR has a label that it is following.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Codeinwp/action-pr-merged-announcer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Codeinwp/action-pr-merged-announcer/issues"
+  },
+  "homepage": "https://github.com/Codeinwp/action-pr-merged-announcer#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.7",
+    "@actions/github": "^4.0.0",
+    "actions-toolkit": "^6.0.1"
+  }
+}
