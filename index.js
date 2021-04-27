@@ -71,6 +71,7 @@ async function createNewIssues(tools, linkedIssues, {
     destination = {owner: destination[0], repo: destination[1]};
     for (let i = 0, len = linkedIssues.length; i < len; i++) {
         let linkedIssue = linkedIssues[i];
+        log.debug("Verifying issue", linkedIssue);
         let linkedIssueDetails = await github.issues.get(linkedIssue);
 
         let hasLinkedIssueMention = false;
