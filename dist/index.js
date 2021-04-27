@@ -21471,17 +21471,22 @@ async function createNewIssues(tools, linkedIssues, {
     for (let i = 0, len = linkedIssues.length; i < len; i++) {
         let linkedIssue = linkedIssues[i];
         let linkedIssueDetails = await github.issues.get(linkedIssue);
-        let linkedIssueEvents = await github.issues.listEventsForTimeline(linkedIssue);
-        linkedIssueEvents = linkedIssueEvents.data.filter(data => {
-            return data.event === 'cross-referenced'
-        });
+
         let hasLinkedIssueMention = false;
-        linkedIssueEvents.forEach(linkedEventData => {
-            const linkedRepo = linkedEventData.source.issue.repository.full_name || '';
-            if ( linkedRepo === destinationRepo) {
-                hasLinkedIssueMention = true;
-            }
-        })
+        try {
+            let linkedIssueEvents = await github.issues.listEventsForTimeline(linkedIssue);
+            linkedIssueEvents = linkedIssueEvents.data.filter(data => {
+                return data.event === 'cross-referenced'
+            });
+            linkedIssueEvents.forEach(linkedEventData => {
+                const linkedRepo = linkedEventData.source.issue.repository.full_name || '';
+                if (linkedRepo === destinationRepo) {
+                    hasLinkedIssueMention = true;
+                }
+            })
+        } catch (err) {
+            hasLinkedIssueMention = false;
+        }
         if (hasLinkedIssueMention) {
             log.debug("Linked issue has already a connected one.", linkedIssue);
             continue;
