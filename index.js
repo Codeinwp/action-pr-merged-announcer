@@ -138,8 +138,9 @@ async function getLinkedIssue(tools) {
     let allIssues = bodyLinkedIssues.concat(eventsLinkedIssues);
     const seen = new Set();
     allIssues = allIssues.filter(el => {
-        const duplicate = seen.has(el.id);
-        seen.add(el.id);
+        let elementKey = JSON.stringify(el);
+        const duplicate = seen.has(elementKey);
+        seen.add(elementKey);
         return !duplicate;
     });
     return allIssues;
