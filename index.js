@@ -3,7 +3,8 @@ const github = require('@actions/github');
 const {Toolkit} = require('actions-toolkit');
 const issueParser = require('issue-parser')
 const parse = issueParser('github');
-const TESTING_REPO = 'neve'
+//const TESTING_REPO = 'neve'
+const TESTING_REPO = '';
 Toolkit.run(async tools => {
     try {
         if (!tools.context.payload.pull_request) {
