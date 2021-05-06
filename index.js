@@ -111,8 +111,8 @@ async function getSubscribedIssues(tools, linkedIssues, subscribeLabel) {
     const github = tools.github;
     let subscribedIssues = [];
     let issueLabels;
-    let hasLabel = false;
     for (let i = 0, len = linkedIssues.length; i < len; i++) {
+        let hasLabel = false;
         issueLabels = await github.issues.listLabelsOnIssue(linkedIssues[i]);
         issueLabels.data.forEach(label => {
             if (label.name === subscribeLabel) {
